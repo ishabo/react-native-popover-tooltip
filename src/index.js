@@ -28,24 +28,24 @@ type Props = {
   buttonComponent: React.Node,
   buttonComponentExpandRatio: number,
   items: $ReadOnlyArray<{ +label: Label, onPress: () => void }>,
-  componentWrapperStyle?: StyleObj,
-  overlayStyle?: StyleObj,
-  tooltipContainerStyle?: StyleObj,
-  labelContainerStyle?: StyleObj,
-  labelSeparatorColor: string,
-  labelStyle?: StyleObj,
-  setBelow: bool,
-  animationType?: "timing" | "spring",
-  onRequestClose: () => void,
-  triangleOffset: number,
-  delayLongPress: number,
-  onOpenTooltipMenu?: () => void,
-  onCloseTooltipMenu?: () => void,
-  onPress?: () => void,
-  componentContainerStyle?: StyleObj,
-  timingConfig?: { duration?: number },
-  springConfig?: { tension?: number, friction?: number },
-  opacityChangeDuration?: number,
+    componentWrapperStyle ?: StyleObj,
+    overlayStyle ?: StyleObj,
+    tooltipContainerStyle ?: StyleObj,
+    labelContainerStyle ?: StyleObj,
+    labelSeparatorColor: string,
+      labelStyle ?: StyleObj,
+      setBelow: bool,
+        animationType ?: "timing" | "spring",
+        onRequestClose: () => void,
+          triangleOffset: number,
+            delayLongPress: number,
+              onOpenTooltipMenu ?: () => void,
+              onCloseTooltipMenu ?: () => void,
+              onPress ?: () => void,
+              componentContainerStyle ?: StyleObj,
+              timingConfig ?: { duration?: number },
+              springConfig ?: { tension?: number, friction?: number },
+              opacityChangeDuration ?: number,
 };
 type State = {
   isModalOpen: bool,
@@ -81,7 +81,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
     labelSeparatorColor: PropTypes.string,
     labelStyle: Text.propTypes.style,
     setBelow: PropTypes.bool,
-    animationType: PropTypes.oneOf([ "timing", "spring" ]),
+    animationType: PropTypes.oneOf(["timing", "spring"]),
     onRequestClose: PropTypes.func,
     triangleOffset: PropTypes.number,
     delayLongPress: PropTypes.number,
@@ -96,7 +96,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
   static defaultProps = {
     buttonComponentExpandRatio: 1.0,
     labelSeparatorColor: "#E1E1E1",
-    onRequestClose: () => {},
+    onRequestClose: () => { },
     setBelow: false,
     delayLongPress: 100,
     triangleOffset: 0,
@@ -226,7 +226,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
 
   render() {
     const tooltipContainerStyle = {
-      left: this.state.tooltipContainerX,
+      right: this.state.tooltipContainerX,
       top: this.state.tooltipContainerY,
       transform: [
         { scale: this.state.tooltipContainerScale },
@@ -234,7 +234,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
     };
 
     const items = this.props.items.map((item, index) => {
-      const classes = [ this.props.labelContainerStyle ];
+      const classes = [this.props.labelContainerStyle];
 
       if (index !== this.props.items.length - 1) {
         classes.push([
@@ -268,7 +268,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
           styles.triangleDown,
           {
             marginLeft: this.state.tooltipTriangleLeftMargin,
-            left: this.state.triangleOffset,
+            right: this.state.triangleOffset,
           },
           borderStyle,
         ]} />
@@ -279,7 +279,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
           styles.triangleUp,
           {
             marginLeft: this.state.tooltipTriangleLeftMargin,
-            left: this.state.triangleOffset,
+            right: this.state.triangleOffset,
           },
           borderStyle,
         ]} />
@@ -342,14 +342,14 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
           </Animated.View>
           <Animated.View style={{
             position: 'absolute',
-            left: this.state.x,
+            right: this.state.x,
             top: this.state.y,
             width: this.state.width,
             height: this.state.height,
             backgroundColor: 'transparent',
             opacity: this.state.buttonComponentOpacity, // At the first frame, the button will be rendered
-                                                        // in the top-left corner. So we dont render it
-                                                        // until its position has been calculated.
+            // in the top-left corner. So we dont render it
+            // until its position has been calculated.
             transform: [
               { scale: this.state.buttonComponentContainerScale },
             ],
